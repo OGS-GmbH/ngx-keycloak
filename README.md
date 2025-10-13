@@ -1,7 +1,7 @@
 # Keycloak Lib
-![GitHub License](https://img.shields.io/github/license/OGS-GmbH/ngx-m3-components?color=0f434e)
-![NPM Version](https://img.shields.io/npm/v/%40ogs-gmbh%2Fngx-m3-components?color=0f434e)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/OGS-GmbH/ngx-m3-components/main-deploy.yml?color=0f434e)
+![GitHub License](https://img.shields.io/github/license/OGS-GmbH/ngx-keycloak?color=0f434e)
+![NPM Version](https://img.shields.io/npm/v/%40ogs-gmbh%2Fngx-keycloak?color=0f434e)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/OGS-GmbH/ngx-keycloak/main-deploy.yml?color=0f434e)
 
 A package that provides a seamless interface for integrating Keycloak authentication into Angular applications. It simplifies communication between Angular and Keycloak, handling token management, session control, and user authentication. 
 
