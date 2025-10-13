@@ -3,12 +3,12 @@
 ![NPM Version](https://img.shields.io/npm/v/%40ogs-gmbh%2Fngx-m3-components?color=0f434e)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/OGS-GmbH/ngx-m3-components/main-deploy.yml?color=0f434e)
 
-A collection of reusable, customizable UI components built with Angular and Material 3. Each component is designed to extend or complement Angular Material with consistent theming, accessibility, and responsiveness in mind. Ideal for modern Angular applications following the Material Design 3 guidelines.
+A package that provides a seamless interface for integrating Keycloak authentication into Angular applications. It simplifies communication between Angular and Keycloak, handling token management, session control, and user authentication. 
 
 ## Installation
 To get started, you can install this package using your preferred package manager.
 ````shell
-npm install @ogs-gmbh/ngx-m3-components
+npm install @ogs-gmbh/ngx-keycloak
 ````
 
 <details>
@@ -16,11 +16,11 @@ npm install @ogs-gmbh/ngx-m3-components
 <br />
 
 ````shell
-yarn add @ogs-gmbh/ngx-m3-components
+yarn add @ogs-gmbh/ngx-keycloak
 ````
 
 ````shell
-pnpm install @ogs-gmbh/ngx-m3-components
+pnpm install @ogs-gmbh/ngx-keycloak
 ````
 
 </details> 
