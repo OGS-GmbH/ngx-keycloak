@@ -1,47 +1,47 @@
 {
 	"name": "@ogs-gmbh/ngx-keycloak",
-	"version": "0.0.0",
-  "description": "A package that provides a seamless interface for integrating Keycloak authentication into Angular applications. It simplifies communication between Angular and Keycloak, handling token management, session control, and user authentication.",
-  "keywords": [
-    "keycloak",
-    "keycloak-js",
-    "keycloak-client",
-    "keycloak-auth",
-    "keycloak-adapter",
-    "keycloak-integration",
-    "keycloak-angular",
-    "oidc",
-    "openid-connect",
-    "oauth2",
-    "authentication",
-    "authorization",
-    "sso",
-    "identity-management",
-    "iam",
-    "jwt",
-    "access-token",
-    "security"
-  ],
-  "homepage": "https://github.com/OGS-GmbH/ngx-keycloak",
-  "bugs": "https://github.com/OGS-GmbH/ngx-keycloak/issues",
-  "license": "MIT",
+	"version": "1.0.0",
+	"description": "A package that provides a seamless interface for integrating Keycloak authentication into Angular applications. It simplifies communication between Angular and Keycloak, handling token management, session control, and user authentication.",
+	"keywords": [
+		"keycloak",
+		"keycloak-js",
+		"keycloak-client",
+		"keycloak-auth",
+		"keycloak-adapter",
+		"keycloak-integration",
+		"keycloak-angular",
+		"oidc",
+		"openid-connect",
+		"oauth2",
+		"authentication",
+		"authorization",
+		"sso",
+		"identity-management",
+		"iam",
+		"jwt",
+		"access-token",
+		"security"
+	],
+	"homepage": "https://github.com/OGS-GmbH/ngx-keycloak",
+	"bugs": "https://github.com/OGS-GmbH/ngx-keycloak/issues",
+	"license": "MIT",
 	"author": "OGS GmbH",
-  "contributors": [
-    {
+	"contributors": [
+		{
 			"name": "Simon Kovtyk",
 			"email": "simon@kovtyk.com",
 			"url": "https://simonkov.dev"
 		}
-  ],
+	],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/OGS-GmbH/ngx-keycloak.git"
 	},
 	"scripts": {
 		"ci:build:main:production": "ng build --configuration=production",
-    "ci:pr:commitlint:main:commitlint": "commitlint",
+		"ci:pr:commitlint:main:commitlint": "commitlint",
 		"ci:pr:lint:main:eslint": "eslint .",
-    "prepare": "husky"
+		"prepare": "husky"
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "^18.2.19",
