@@ -46,7 +46,7 @@ This provides our application the ability to use all functionalities from this p
 
 ## Configuration
 ### KeycloakConfig
-For configure this package, we need to provide a configuration with the type of ``KeycloakConfig``. This configuration represents the customizations of the Keycloak-Workflow on our client-side.
+To configure this package, we need to provide a configuration with the type of ``KeycloakConfig``. This configuration represents the customizations of the Keycloak-Workflow on our client-side.
 
 Supported properties of ``KeycloakConfig``:
 ```` typescript
@@ -81,13 +81,13 @@ After creating a ``KeycloakConfig``, we can provide it by an injection-token:
 ````
 
 #### resource
-The resource our client is accessing to. This option'll be appended into the requests' body as form data with the key "client_id".
+The resource our client wants to access. This option will be appended into the requests' body as form data with the key "client_id".
 
 #### authServerUrl
-The URL or Path to our auth server. Every endpoint from Keycloak will be appended to this.
+The URL or Path to our auth server. Every endpoint from Keycloak will be appended to it.
 
 #### realm
-The realm from Keycloak specifikation.
+The realm from Keycloak specification.
 
 #### guardFallbackUrl
 Fallback-URL the user gets redirected to, when securing router with ``keycloakGuard`` and missing authentication.
@@ -122,7 +122,7 @@ private readonly _keycloakService: KeycloakService = inject(KeycloakService);
 ### API
 #### Methods
 ##### set notAuthorisedCallback(value: (() => void) | undefined)
-This methods allows to add a callback to this service, that'll be executed if the user is not authorised by Keycloak.
+This methods allows to add a callback to this service, that'll be executed if the user is not authorized by Keycloak.
 
 Arguments:
 - value: The callback, that'll be executed.
@@ -153,8 +153,8 @@ Arguments:
 
 ##### validateCredentials(email: string, password: string, additionalsInRequest?: AdditionalsInRequest | undefined): Observable&lt;void&gt;
 Validate credentials of an user by creating a new Keycloak session.\
-If the given credentials are valid, then the Keycloak Session'll be invalidated by revoking the Access Tokens of the created Keycloak session.\
-Otherwise, a new Keycloak session could not be created and a revokation is void.
+If the given credentials are valid, then the Keycloak session will be invalidated by revoking the Access Tokens of the created Keycloak session.\
+Otherwise, a new Keycloak session could not be created and a revocation is void.
 
 Arguments:
 - email: The given email by the user
@@ -229,7 +229,7 @@ Returns: ``string``, that represents the Access Token, if the Access Token is pr
 ##### get refreshToken(): string | undefined
 Getter for getting the Refresh Token, that is stored in the storage.
 
-Returns: ``stirng``, that represents the Refresh Token, if the Refresh Token is present in the storage. Otherwise ``undefined``.
+Returns: ``string``, that represents the Refresh Token, if the Refresh Token is present in the storage. Otherwise ``undefined``.
 
 ##### get TTLOfAccessToken(): number
 Getter for getting the TTL of Access Token.
