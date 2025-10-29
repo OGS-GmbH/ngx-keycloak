@@ -272,7 +272,7 @@ Feel free to submit a pull request or start a discussion — we're happy to coll
 
 ---
 
-<a href="https://www.ogs.de/en/"><img src="https://www.ogs.de/fileadmin/templates/main/img/logo.png" height="32" /></a>
+<a href="https://www.ogs.de/en/"><img src="https://www.ogs.de/fileadmin/templates/main/img/logo.png" height="32" style="height:32px; width:auto;"/></a>
 <p>Gesellschaft für Datenverarbeitung und Systemberatung mbH</p>
 
 [Imprint](https://www.ogs.de/en/imprint/) | [Contact](https://www.ogs.de/en/contact/) | [Careers](https://www.ogs.de/en/about-ogs/#Careers)
