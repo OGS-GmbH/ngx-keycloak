@@ -23,3 +23,5 @@ jobs:
       release_please_target_branch: "main"
   call-doc-deploy:
     uses: OGS-GmbH/reusable-github-actions/.github/workflows/doc-publish.yml@feat/doc-publish
+    secrets:
+      GH_DEPLOY_TOKEN: ${{ secrets.GH_DEPLOY_TOKEN }}
