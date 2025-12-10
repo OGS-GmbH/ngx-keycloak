@@ -8,6 +8,7 @@ import { parseJWT } from "../utils/parse-jwt";
 
 /**
  * Service for handling Storage Access to Keycloak Tokens
+ *  @category Services
  */
 @Injectable({
   providedIn: "root"
@@ -17,6 +18,7 @@ export class KeycloakStoreService {
 
   /**
    * Clears all data in the storage
+   * @author Simon Kovtyk
    */
   public clear (): void {
     this._config.storageType.removeItem(this._config.storageKey);
@@ -24,6 +26,7 @@ export class KeycloakStoreService {
 
   /**
    * Clears the tokens out of the storage
+   * @author Simon Kovtyk
    */
   public clearTokens (): void {
     if (!this._config.useEmailAsCurrentUser) return void this._config.storageType.removeItem(this._config.storageKey);
@@ -37,6 +40,7 @@ export class KeycloakStoreService {
 
   /**
    * Clears the email out of storage
+   * @author Simon Kovtyk
    */
   public clearEmail (): void {
     if (!this._config.useEmailAsCurrentUser) return;
@@ -51,6 +55,7 @@ export class KeycloakStoreService {
   /**
    * Setter for setting email in Storage
    * @param {string | null} email - The email, that should be saved
+   * @author Simon Kovtyk
    */
   public set email (email: string | null) {
     if (!this._config.useEmailAsCurrentUser) return;
@@ -76,6 +81,7 @@ export class KeycloakStoreService {
   /**
    * Getter for getting email key from Storage
    * @return {string | null} - The existing email
+   * @author Simon Kovtyk
    */
   public get email (): string | null {
     if (!this._config.useEmailAsCurrentUser) return null;
@@ -88,6 +94,7 @@ export class KeycloakStoreService {
   /**
    * Setter for setting Keycloak Tokens
    * @param {KeycloakTokens | null} tokens - Keycloak Tokens, that should be saved
+   * @author Simon Kovtyk
    */
   public set tokens (tokens: KeycloakTokens | null) {
     if (this._config.useEmailAsCurrentUser) {
@@ -123,6 +130,7 @@ export class KeycloakStoreService {
   /**
    * Getter for getting the Keycloak Tokens from Storage
    * @return {KeycloakTokens | null} - The Keycloak Tokens from Storage
+   * @author Simon Kovtyk
    */
   public get tokens (): KeycloakTokens | null {
     const storageValue: string | null = this._config.storageType.getItem(this._config.storageKey);
@@ -135,6 +143,7 @@ export class KeycloakStoreService {
   /**
    * Getter for getting the Keycloak Access Token
    * @return {string | undefined} - Keycloak Access Token
+   * @author Simon Kovtyk
    */
   public get accessToken (): string | undefined {
     return this.tokens?.access_token;
@@ -143,6 +152,7 @@ export class KeycloakStoreService {
   /**
    * Getter for getting the Keycloak Refresh Token
    * @return {string | undefined}
+   * @author Simon Kovtyk
    */
   public get refreshToken (): string | undefined {
     return this.tokens?.refresh_token;
@@ -151,6 +161,7 @@ export class KeycloakStoreService {
   /**
    * Getter for getting the Time-To-Live of Keycloak Access Token
    * @return {number} - Seconds of the TTL of Keycloak Access Token
+   * @author Simon Kovtyk
    */
   public get TTLOfAccessToken (): number {
     const parsedAccessToken: ParsedKeycloakToken | null = this.parsedAccessToken;
@@ -167,6 +178,7 @@ export class KeycloakStoreService {
   /**
    * Getter for getting the remaining Time-To-Live of Keycloak Access Token by existance
    * @return {number} - Seconds of the TTL of Keycloak Access Token
+   * @author Simon Kovtyk
    */
   public get remainingTTLOfAccessToken (): number {
     const expiry: number | undefined = this.parsedAccessToken?.exp;
@@ -177,6 +189,7 @@ export class KeycloakStoreService {
   /**
    * Getter for getting the remaining Time-To-Live of Keycloak Access Token by existance
    * @return {number} - Seconds of the TTL of Keycloak Access Token
+   * @author Simon Kovtyk
    */
   public get remainingTTLOfRefreshToken (): number {
     const expiry: number | undefined = this.parsedRefreshToken?.exp;
@@ -191,6 +204,7 @@ export class KeycloakStoreService {
   /**
    * Get decoded Access Token
    * @return {ParsedKeycloakToken | null} - The decoded Access Token
+   * @author Simon Kovtyk
    */
   public get parsedAccessToken (): ParsedKeycloakToken | null {
     const accessToken: string | undefined = this.accessToken;
@@ -209,6 +223,7 @@ export class KeycloakStoreService {
   /**
    * Get decoded Refresh Token
    * @return {ParsedKeycloakToken | null} - The decoded Refresh Token
+   * @author Simon Kovtyk
    */
   public get parsedRefreshToken (): ParsedKeycloakToken | null {
     const refreshToken: string | undefined = this.refreshToken;

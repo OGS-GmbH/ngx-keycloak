@@ -10,6 +10,7 @@ export * from "./providers/interceptor.provider";
 export * from "./services/store.service";
 export * from "./services/auth.service";
 export * from "./tokens/config.token";
+export * from "./tokens/http.token";
 export * from "./types/config.type";
 export * from "./lib.module";
 export * from "./enums/update-strategy.enum";

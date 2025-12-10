@@ -15,6 +15,7 @@ import { KeycloakStoreService } from "./store.service";
 
 /**
  * Service for handling Keycloak sessions
+ * @category Services
  */
 @Injectable({
   providedIn: "root"
@@ -48,15 +49,11 @@ export class KeycloakService {
 
   private readonly _timeout: number = this._keycloakConfig.timeout ?? 3000;
 
-  private _isRefreshTokenValidThen (compareWith: number): boolean {
-    const remainingTTLOfRefreshToken: number = this._keycloakStoreService.remainingTTLOfRefreshToken;
-
-    return remainingTTLOfRefreshToken > compareWith;
-  }
 
   /**
    * Checks if a user is authorized by checking the state of the called workflow
    * @return {boolean} - The status of the potential authorization
+   * @author Simon Kovtyk
    */
   public isAuthorized (): boolean {
     return this._isAuthorized.value;
@@ -65,6 +62,7 @@ export class KeycloakService {
   /**
    * Checks if a user is authorized by checking the state of the called workflow
    * @returns {Observable<boolean>} - An observable with the status of the potential authorization
+   * @author Simon Kovtyk
    */
   public isAuthorized$ (): Observable<boolean> {
     return this._isAuthorized$;
@@ -72,7 +70,8 @@ export class KeycloakService {
 
   /**
    * Setter for setting the authorization of
-   * @param {boolean} isAuthorized
+   * @param {boolean} isAuthorized - Determine if the user is authorized
+   * @author Simon Kovtyk
    */
   public setAuthorized (isAuthorized: boolean): void {
     this._isAuthorized.next(isAuthorized);
@@ -191,6 +190,7 @@ export class KeycloakService {
   /**
    * Checks if the current refresh token is valid
    * @returns {boolean} - The state of the validity
+   * @author Simon Kovtyk
    */
   public isRefreshTokenValid (): boolean {
     const refreshToken: string | undefined = this._keycloakStoreService.refreshToken;
@@ -209,6 +209,7 @@ export class KeycloakService {
   /**
    * Checks if the current access token is valid
    * @returns {boolean} - The state of the validity
+   * @author Simon Kovtyk
    */
   public isAccessTokenValid (): boolean {
     const accessToken: string | undefined = this._keycloakStoreService.accessToken;
@@ -228,9 +229,10 @@ export class KeycloakService {
    * Creating sessions by email and password. Can also take additional HTTP Headers.
    * @param {string} email - Email that the user uses
    * @param {string} password - Password the users uses
-   * @param {AdditionalsInRequest[] | undefined} additionalsInRequest - Additionals for the HTTP Request (Header-
+   * @param { HttpHeaders | undefined} httpHeaders - Additionals for the HTTP Request (Header-
    *   and/or Body-Additions)
    * @return {Observable<KeycloakTokens>} - Tokens as Observable
+   *  @author Simon Kovtyk
    */
   public login (email: string, password: string, autoStartInterval?: boolean, httpHeaders?: HttpHeaders): Observable<KeycloakTokens> {
     this._keycloakStoreService.email = email;
@@ -275,9 +277,10 @@ export class KeycloakService {
 
   /**
    * Revoke sessions by logged in user. Can also take additional HTTP Headers.
-   * @param {AdditionalsInRequest | undefined} additionalsInRequest - Additionals for the HTTP Request (Header- and/or
+   * @param { HttpHeaders | undefined} httpHeaders - Additionals for the HTTP Request (Header- and/or
    *   Body-Additions)
    * @return {Observable<void>} - void as Observable
+   * @author Simon Kovtyk
    */
   public logout (httpHeaders?: HttpHeaders): Observable<void> {
     let headers: HttpHeaders = new HttpHeaders({
@@ -309,8 +312,9 @@ export class KeycloakService {
 
   /**
    * Initializing the Access Token refresh procedure after the remaining TTL of the existing Access Token is reached
-   * @param {AdditionalsInRequest | undefined} additionalsInRequest - Additionals for the HTTP Request (Header- and/or
-   *   Body-Additions)
+   * @param {HttpHeaders | undefined} httpHeaders - Additionals for the HTTP Request (Header- and/or Body-Additions)
+   * @return {void}
+   * @author Simon Kovtyk
    */
   public startAccessTokenUpdate (httpHeaders?: HttpHeaders): void {
     if (!this.isRefreshTokenValid())
@@ -323,6 +327,8 @@ export class KeycloakService {
   /**
    * Removing the Access Token refresh procedure.\
    * INFO: Does get called after successfull KeycloakService.logout().
+   * @return {void}
+   * @author Simon Kovtyk
    */
   public stopAccessTokenUpdate (): void {
     this._accessTokenUpdateTimerSubscription?.unsubscribe();
@@ -330,9 +336,10 @@ export class KeycloakService {
   }
 
   /**
-   * Force to update the Access Token. Can also take additional HTTP Headers.
-   * @param {AdditionalsInRequest | undefined} additionalsInRequest - Additionals for the HTTP Request (Header- and/or Body-Additions)
+   * Force the Access Token update. Can also take additional HTTP Headers.
+   * @param {HttpHeaders | undefined} httpHeaders - Additionals for the HTTP Request (Header- and/or Body-Additions)
    * @return {Observable<KeycloakTokens>} - Tokens as Observable
+   * @author Simon Kovtyk
    */
   public forceUpdateAccessToken (httpHeaders?: HttpHeaders): Observable<KeycloakTokens> {
     return this.isRefreshTokenValid()
@@ -344,9 +351,10 @@ export class KeycloakService {
    * Validate user Credentials by creating a new Session and mark the newly created Session as invalid.
    * @param {string} email - The email as partial credential
    * @param {string} password - The password as partial credential
-   * @param {AdditionalsInRequest | undefined} additionalsInRequest - Additionals for the HTTP Request (Header- and/or
+   * @param {  HttpOptions<never> | undefined} httpOptions - Additionals for the HTTP Request (Header- and/or
    *   Body-Additions)
    * @return {Observable<void>}
+   * @author Simon Kovtyk
    */
   public validateCredentials (email: string, password: string, httpOptions?: HttpOptions<never>): Observable<void> {
     let headers: HttpHeaders = new HttpHeaders({
@@ -378,7 +386,8 @@ export class KeycloakService {
   /**
    * Check if an explicit allowed origin is in the Access Token
    * @param {string} allowedOrigin - The allowedOrigin to check
-   * @returns {boolean} - true, if the allowedOrigin exists, otherweise false
+   * @returns {boolean} - true, if the allowedOrigin exists, otherwise false
+   * @author Simon Kovtyk
    */
   public hasAccessTokenAllowedOrigin (allowedOrigin: string): boolean {
     const parsedAccessToken: ParsedKeycloakToken | null = this._keycloakStoreService.parsedAccessToken;
@@ -392,6 +401,7 @@ export class KeycloakService {
    * Check if an explicit aud is in the Access Token
    * @param {string} aud - The aud to check
    * @returns {boolean} - true, if the aud exists, otherwise false
+   * @author Simon Kovtyk
    */
   public hasAccessTokenAud (aud: string): boolean {
     const parsedAccessToken: ParsedKeycloakToken | null = this._keycloakStoreService.parsedAccessToken;
@@ -405,6 +415,7 @@ export class KeycloakService {
    * Check if an explicit realmAccess is in the Access Token
    * @param {string} realmAccess - The realmAccess to check
    * @returns {boolean} - true, if the realmAccess exists, otherwise false
+   * @author Simon Kovtyk
    */
   public hasAccessTokenRealmAccess (realmAccess: string): boolean {
     const parsedAccessToken: ParsedKeycloakToken | null = this._keycloakStoreService.parsedAccessToken;
@@ -419,6 +430,7 @@ export class KeycloakService {
    * @param {string} key - The key to resolve the resourceAccess
    * @param {string} resourceAccess - The resourceAccess to check
    * @returns {boolean} - true, if the resourceAccess exists, otherwise false
+   * @author Simon Kovtyk
    */
   public hasAccessTokenResourceAccess (key: string, resourceAccess: string): boolean {
     const parsedAccessToken: ParsedKeycloakToken | null = this._keycloakStoreService.parsedAccessToken;

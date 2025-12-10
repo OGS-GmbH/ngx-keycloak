@@ -7,6 +7,7 @@ import { KeycloakGuardOptions } from "../types/guard.type";
 
 /**
  * Typical guard for securing client side routes
+ * @category Guard
  * @return {CanActivateFn} - Returns the actual fn.
  */
 export const keycloakGuard: (options?: KeycloakGuardOptions) => CanActivateFn = (options?: KeycloakGuardOptions): CanActivateFn => (): MaybeAsync<GuardResult> => {

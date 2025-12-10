@@ -1,7 +1,16 @@
 import { HttpConfig } from "@ogs-gmbh/ngx-http";
 import { UpdateStrategy } from "../enums/update-strategy.enum";
 
+
+/**
+ * Service for handling Keycloak sessions
+ * @category Types
+ */
+
 export type GuardFallbackFn = () => unknown;
+/**
+ * @category Types
+ */
 export type SpecificKeycloakConfig = {
   resource: string;
   realm: string;
@@ -18,6 +27,7 @@ export type SpecificKeycloakConfig = {
 };
 /**
  * Type is used for defining Keycloak-specific data
+ * @category Types
  */
 export type KeycloakConfig = {
   http: HttpConfig;

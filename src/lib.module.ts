@@ -2,12 +2,15 @@ import { CommonModule } from "@angular/common";
 import { ModuleWithProviders, NgModule } from "@angular/core";
 import { provideKeycloakConfig } from "./providers/config.provider";
 import { provideKeycloakHttpConfig } from "./providers/http.provider";
-import { provideKeycloakTokenInvalidInterceptor, provideKeylcoakInterceptor } from "./providers/interceptor.provider";
+import { provideKeycloakTokenInvalidInterceptor, provideKeycloakInterceptor } from "./providers/interceptor.provider";
 import { KeycloakService } from "./services/auth.service";
 import { KeycloakStoreService } from "./services/store.service";
 import { KeycloakConfig } from "./types/config.type";
 
 /* eslint-disable @tseslint/no-extraneous-class */
+/**
+ * @category Module
+ */
 @NgModule({
   imports: [
     CommonModule
@@ -15,7 +18,7 @@ import { KeycloakConfig } from "./types/config.type";
   providers: [
     KeycloakService,
     KeycloakStoreService,
-    provideKeylcoakInterceptor(),
+    provideKeycloakInterceptor(),
     provideKeycloakTokenInvalidInterceptor()
   ]
 })
