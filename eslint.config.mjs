@@ -34,7 +34,9 @@ export default tseslint.config(
       "node_modules",
       "dist",
       "CHANGELOG.md",
-      "README.md"
+      "README.md",
+      ".vitepress",
+      "CODE_OF_CONDUCT.md"
     ]
   },
   {

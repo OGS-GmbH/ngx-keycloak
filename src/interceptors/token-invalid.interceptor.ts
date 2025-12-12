@@ -6,8 +6,19 @@ import { KEYCLOAK_CONFIG_TOKEN } from "../tokens/config.token";
 import { SpecificKeycloakConfig } from "../types/config.type";
 import { shouldUpdateByInterceptor } from "../utils/update";
 
-/* eslint-disable-next-line @tseslint/typedef */
+/**
+ * HTTP Header for skipping the Interceptor
+ * @readonly
+ *
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
+// eslint-disable-next-line @tseslint/typedef
 export const SKIP_KEYCLOAK_TOKEN_INVALID_INTERCEPTOR = "skip-keycloak-token-invalid-interceptor" as const;
+/**
+ * Interceptor for handling invalid Keycloak Tokens by Unauthorized HTTP Responses
+ * @category Interceptors
+ */
 @Injectable()
 export class KeycloakTokenInvalidInterceptor implements HttpInterceptor {
   private _keycloakConfig: SpecificKeycloakConfig = inject(KEYCLOAK_CONFIG_TOKEN);

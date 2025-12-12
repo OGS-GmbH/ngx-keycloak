@@ -1,7 +1,31 @@
-import { KeycloakTokens } from "./api-response.type";
+import { KeycloakTokensResponse } from "./api-response.type";
 
+/**
+ * Keycloak Storage Types
+ *
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
 export type MultiKeycloakStorage = {
+  /**
+   * Email of the current user
+   *
+   * @since 1.0.0
+   * @author Simon Kovtyk
+   */
   email?: string | undefined;
-  tokens?: KeycloakTokens | undefined;
+  /**
+   * Keycloak Tokens
+   *
+   * @since 1.0.0
+   * @author Simon Kovtyk
+   */
+  tokens?: KeycloakTokensResponse | undefined;
 };
-export type SimpleKeycloakStorage = KeycloakTokens;
+/**
+ * Simple Keycloak Storage Type
+ *
+ * @since 1.0.0
+ * @author Simon Kovtyk
+ */
+export type SimpleKeycloakStorage = KeycloakTokensResponse;

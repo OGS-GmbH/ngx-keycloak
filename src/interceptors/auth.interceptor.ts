@@ -8,11 +8,18 @@ import { SpecificKeycloakConfig } from "../types/config.type";
 /* eslint-disable @tseslint/typedef */
 /**
  * HTTP Header for skipping the Interceptor
+ *
+ * @since 1.0.0
+ * @author Simon Kovtyk
  */
 export const SKIP_KEYCLOAK_INTERCEPTOR = "skip-keycloak-interceptor" as const;
 /* eslint-enable @tseslint/typedef */
 /**
  * Interceptor for appending relevant HTTP Headers to HTTP Request
+ * @category Interceptors
+ *
+ * @since 1.0.0
+ * @author Simon Kovtyk
  */
 @Injectable({
   providedIn: "root"
