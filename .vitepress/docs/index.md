@@ -13,7 +13,7 @@ hero:
       text: Reference
       link: /reference
     - theme: alt
-      text: Github
+      text: GitHub
       link: https://github.com/OGS-GmbH/ngx-keycloak
 
 features:
