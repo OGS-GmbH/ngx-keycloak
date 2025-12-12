@@ -1,114 +1,88 @@
 # Configuration
-To configure this package, we need to provide a configuration of type ``KeycloakConfig``. This configuration represents the customizations of the Keycloak-Workflow on our client-side.
 
-Supported properties of ``KeycloakConfig``:
-```` typescript
-resource: string,
-authServerUrl: string,
-realm: string,
-guardFallbackUrl: string,
-storageType: Storage,
-storageKey: string,
-useEmailAsCurrentUser?: boolean | undefined,
-timeout?: number | undefined,
-expirationOffset?: number | undefined
-````
+## Creating a config
 
+You can create a config by using type [`KeycloakConfig`](/reference/types/KeycloakConfig).
 
+To configure the http property, adhere to [ngx-http docs](https://ogs-gmbh.github.io/ngx-http/reference/types/HttpConfig).
 
-### ``resource``
-The resource our client is accessing. This option will be appended into the requests' body as form data with the key "client_id".
+Take the following code as an example:
 
-### ``authServerUrl``
-The URL or Path to our auth server. Every endpoint from Keycloak will be appended to this.
+```typescript [keycloak.config.ts]
+import { KeycloakConfig } from "@ogs-gmbh/ngx-keycloak";
 
-### ``realm``
-The realm from Keycloak specification.
+const config: KeycloakConfig = {
+  http: {
+    // HTTP config
+  },
+  keycloak: {
+    // Keycloak config
+  }
+}
+```
 
-### ``guardFallbackUrl``
-Fallback-URL the user gets redirected to, when securing router with ``keycloakGuard`` and missing authentication.
+## Providing a config
 
-### ``storageType``
-This property allows to specify, which storage should be used to store value.
+To configure this package, we need to provide a configuration of type [`KeycloakConfig`](/reference/types/KeycloakConfig) trough [Dependency Injection](https://v18.angular.dev/guide/di).
 
-### ``storageKey``
-This property enables the customization of the key, where the storage (if enabled) should store the values.
+We offer 2 ways of doing so. Either by using [`KeycloakModule.forRoot`](/reference/classes/KeycloakModule#forroot) (recommended) or by providing both [`KEYCLOAK_CONFIG_TOKEN`](/reference/variables/KEYCLOAK_CONFIG_TOKEN) and [`KEYCLOAK_HTTP_CONFIG`](/reference/variables/KEYCLOAK_HTTP_CONFIG).
 
-### ``useEmailAsCurrentUser``
-**This property is only for internal use.**\
-With this property set to ``true``, the email given by ``KeycloakService.login()`` will be used as currentUser HTTP requests header field as long as the ``KeycloakInterceptor`` is used.\
-Default: ``false``
+::: tip Recommendation
 
-### ``timeout``
-This property is for controlling the HTTP request timeout (in milliseconds).\
-Default: ``3000``
+We recommend to use `KeycloakModule.forRoot` since it provides a better recongnizable API.
 
-### ``expirationOffset``
-This property allows to add offset (in milliseconds) to the expiration of the Access Token.\
-Default: ``3000``
+:::
 
-After creating a ``KeycloakConfig``, we can provide it by an injection-token:
+```typescript [example.module.ts]
+import { KeycloakModule } from "@ogs-gmbh/ngx-keycloak";
 
-```` typescript
-...
 @NgModule({
-	...
-		providers: [
-        ...
-		{
-			provide: KEYCLOAK_CONFIG_TOKEN,
-			useValue: KEYCLOAK_CONFIG
-		},
-
-		{
-      		provide: KEYCLOAK_HTTP_CONFIG_TOKEN,
-     		 useValue: KEYCLOAK_HTTP_CONFIG
-    	}
-	    ...
-    ]
-    ...
+  imports: [
+    KeycloakModule.forRoot(ENVIRONMENT_CONFIG.keycloakConfig)
+  ]
 })
-...
-````
+export class AppModule {}
+```
 
+If you need more control over the API, you can provide both tokens:
 
-Or inject it in ``keycloakModule`` using ``forRoot``
+```typescript [example.module.ts]
+import { KeycloakModule, KEYCLOAK_CONFIG_TOKEN, KEYCLOAK_HTTP_CONFIG_TOKEN } from "@ogs-gmbh/ngx-keycloak";
 
-
-```` typescript
-...
-@NgModule({
-	...
-		imports: [
-        ...
-	    KeycloakModule.forRoot(ENVIRONMENT_CONFIG.keycloakConfig),
-	    ...
-    ]
-    ...
+@NgModule,
+  imports: [
+    KeycloakModule
+  ],
+  providers: [
+    {
+	  provide: KEYCLOAK_CONFIG_TOKEN,
+	  useValue: KEYCLOAK_CONFIG
+	},
+    {
+      provide: KEYCLOAK_HTTP_CONFIG_TOKEN,
+      useValue: KEYCLOAK_HTTP_CONFIG
+    }
+  ]
 })
-...
-````
-
+export class AppModule {}
+```
 
 Both methods register the Keycloak services in Angular's dependency injection system, making them available throughout your application.
 
-
-To use these functionalities, we just need to import it in a file:
-
-
-
 ## Usage
 
-To use the Keycloak functionalities, import the service:
-```typescript
+To use the Keycloak functionalities, use the following example:
+
+```typescript [example.component.ts]
 import { KeycloakService } from "@ogs-gmbh/ngx-keycloak";
+
+@Component({
+  selector: "app-component",
+  template: ``
+})
+export class AppComponent {
+  private readonly _keycloakService: KeycloakService = inject(KeycloakService);
+}
 ```
 
-And inject it in your component or service:
-```typescript
-private readonly _keycloakService: KeycloakService = inject(KeycloakService);
-```
-
-The `inject()` function retrieves the `KeycloakService` instance that was configured by the module, allowing you to use methods like `login()`, `logout()`, `isAuthenticated()`, etc.
-
-
+The [`inject()`](https://angular.dev/api/core/inject) function retrieves the [`KeycloakService`](/reference/classes/KeycloakService) instance that was configured by the module, allowing you to use methods like [`login()`](/reference/classes/KeycloakService#login), [`logout()`](/reference/classes/KeycloakService#logout), [`isAuthenticated()`](/reference/classes/KeycloakService#isauthorized), etc.

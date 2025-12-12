@@ -1,7 +1,3 @@
-/*
- * Public API Surface of keycloak
- */
-
 export * from "./guards/auth.guard";
 export * from "./interceptors/auth.interceptor";
 export * from "./interceptors/token-invalid.interceptor";
@@ -15,4 +11,5 @@ export * from "./types/config.type";
 export * from "./lib.module";
 export * from "./enums/update-strategy.enum";
 export * from "./types/api-response.type";
-
+export * from "./types/token.type";
+export * from "./types/guard.type";

@@ -8,7 +8,10 @@ import { KeycloakGuardOptions } from "../types/guard.type";
 /**
  * Typical guard for securing client side routes
  * @category Guard
- * @return {CanActivateFn} - Returns the actual fn.
+ * @returns `CanActivateFn` function for Angular Routing
+ *
+ * @since 1.0.0
+ * @author Simon Kovtyk
  */
 export const keycloakGuard: (options?: KeycloakGuardOptions) => CanActivateFn = (options?: KeycloakGuardOptions): CanActivateFn => (): MaybeAsync<GuardResult> => {
   const keycloakService: KeycloakService = inject(KeycloakService);

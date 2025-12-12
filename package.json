@@ -40,9 +40,9 @@
   "scripts": {
     "ci:build:main:production": "ng build --configuration=production",
     "ci:docs:extract:typedoc": "typedoc && bash ./prepare-typedoc.sh",
+    "ci:docs:main:vitepress": "vitepress build .vitepress",
     "ci:pr:commitlint:main:commitlint": "commitlint",
     "ci:pr:lint:main:eslint": "eslint .",
-    "docs:build": "vitepress build .vitepress",
     "prepare": "husky",
     "vitepress": "vitepress dev .vitepress",
     "vitepress-preview": "vitepress preview .vitepress"
@@ -77,7 +77,7 @@
     "typedoc-plugin-markdown": "^4.9.0",
     "typescript": "~5.5.4",
     "typescript-eslint": "^8.31.1",
-    "vitepress": "2.0.0-alpha.15",
+    "vitepress": "^1",
     "vitepress-plugin-group-icons": "^1.6.5"
   },
   "peerDependencies": {

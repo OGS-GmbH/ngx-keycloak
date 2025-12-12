@@ -3,9 +3,14 @@ import { buildHttpConnectionString, HttpConfig } from "@ogs-gmbh/ngx-http";
 import { KEYCLOAK_HTTP_CONFIG } from "../tokens/http.token";
 
 /**
+ * Provider for Keycloak HTTP configuration
  * @category Providers
+ * @param httpConfig - Keycloak HTTP configuration
+ * @returns `ValueProvider` for Dependency Injection
+ *
+ * @since 1.0.0
+ * @author Simon Kovtyk
  */
-
 export const provideKeycloakHttpConfig = (httpConfig: HttpConfig): ValueProvider => ({
   provide: KEYCLOAK_HTTP_CONFIG,
   useValue: buildHttpConnectionString(httpConfig),
